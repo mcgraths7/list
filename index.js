@@ -1,17 +1,20 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
-const colors = require('colors');
+const path = require('path');
 const { lstat } = fs.promises;
+require('colors');
 
-const requestedPath = process.argv[2];
+const requestedPath = process.argv[2] || process.cwd();
 
-fs.readdir(requestedPath || process.cwd(), async (err, files) => {
+fs.readdir(requestedPath, async (err, files) => {
   if (err) {
     throw new Error(err);
   }
   let statPromises = files.map((file) => {
-    return lstat(file);
+    fullFile = path.join(requestedPath, file);
+    // console.log(fullFile);
+    return lstat(fullFile);
   });
   const allStats = await Promise.all(statPromises);
   for (let stats of allStats) {
@@ -21,8 +24,10 @@ fs.readdir(requestedPath || process.cwd(), async (err, files) => {
       console.log(filename.red);
     } else if (stats.isDirectory()) {
       console.log(filename.blue);
-    } else {
+    } else if (stats.isFile()) {
       console.log(filename.green);
+    } else {
+      console.log(filename);
     }
   }
 });
