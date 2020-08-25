@@ -3,7 +3,7 @@
 
 const fs = require('fs');
 
-fs.readdir(process.cwd(), { withFileTypes: true }, (err, files) => {
+fs.readdir(process.cwd(), (err, files) => {
   files.map((file) => {
     console.log(file);
   });
