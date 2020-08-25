@@ -1,0 +1,14 @@
+{
+  "name": "list",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:mcgraths7/list.git",
+  "author": "mcgraths7 <mcgrath.steven7@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"There is no test framework\" && exit 1"
+  },
+  "bin": {
+    "nls": "index.js"
+  }
+}
